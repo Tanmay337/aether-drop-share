@@ -102,7 +102,7 @@ export function QrPanel({
       {/* pedestal */}
       <div className="relative grid place-items-center pb-6">
         <div
-          className="absolute bottom-1 h-10 w-3/4 rounded-full opacity-60 blur-2xl"
+          className="absolute bottom-2 h-8 w-2/3 rounded-full opacity-30 blur-2xl"
           style={{ background: "linear-gradient(90deg, var(--indigo-orb), var(--violet-orb))" }}
         />
         <motion.div
