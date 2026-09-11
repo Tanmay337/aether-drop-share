@@ -13,7 +13,10 @@ export function TextTab({ value, onChange }: { value: string; onChange: (v: stri
   const paste = async () => {
     try {
       const text = await navigator.clipboard.readText();
-      if (!text) return toast.error("Clipboard is empty");
+      if (!text) {
+        toast.error("Clipboard is empty");
+        return;
+      }
       onChange(text.slice(0, CHAR_LIMIT));
       toast.success("Pasted from clipboard");
     } catch {

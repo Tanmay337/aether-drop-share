@@ -41,14 +41,12 @@ export function QrPanel({
 }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<HTMLDivElement>(null);
-  const palette = PALETTES[style.palette];
+  const palette = PALETTES[style.palette] ?? PALETTES[0]!;
   const bytes = byteLength(value);
   const oversize = bytes > QR_BYTE_LIMIT;
   const ready = value.length > 0 && !oversize;
 
-  const imageSettings = style.icon
-    ? { src: AETHER_ICON, height: 42, width: 42, excavate: true }
-    : undefined;
+  const imageSettings = { src: AETHER_ICON, height: 42, width: 42, excavate: true };
 
   const downloadPng = () => {
     const canvas = wrapRef.current?.querySelector("canvas");
@@ -128,7 +126,7 @@ export function QrPanel({
                 marginSize={2}
                 fgColor={palette.fg}
                 bgColor={palette.bg}
-                imageSettings={imageSettings}
+                {...(style.icon ? { imageSettings } : {})}
               />
             </div>
           ) : (
@@ -154,7 +152,7 @@ export function QrPanel({
             marginSize={2}
             fgColor={palette.fg}
             bgColor={palette.bg}
-            imageSettings={imageSettings}
+            {...(style.icon ? { imageSettings } : {})}
           />
         )}
       </div>
@@ -170,7 +168,7 @@ export function QrPanel({
             value={[style.rounding]}
             max={100}
             step={1}
-            onValueChange={([v]) => onStyle({ ...style, rounding: v })}
+            onValueChange={([v]) => onStyle({ ...style, rounding: v ?? 0 })}
           />
         </div>
 
